@@ -21,7 +21,6 @@ class CartComponent extends Component {
 
 //////////////////////////////////////////////////
 
-
     public function add($id, $quantity = 1) {
 
 		if(!is_numeric($quantity)) {
@@ -54,11 +53,6 @@ class CartComponent extends Component {
 
 		$this->cart();
 
-//		$cart = $this->cart();
-//		$d['cartTotal'] = $cart['cartTotal'];
-//		$d['cartQuantity'] = $cart['cartQuantity'];
-//		$this->Session->write('Shop.Cart.property', $d);
-
 		return $product;
 	}
 
@@ -88,20 +82,14 @@ class CartComponent extends Component {
 				$cartQuantity += $item['quantity'];
 				$cartWeight += $item['totalweight'];
 			}
-			$d['cartTotal'] = $cartTotal;
+			$d['cartTotal'] = sprintf('%01.2f', $cartTotal);
 			$d['cartQuantity'] = $cartQuantity;
 			$d['cartWeight'] = $cartWeight;
 			$this->Session->write('Shop.Cart.Property', $d);
 			return true;
-//			return array(
-//				'Products' => $cart['items'],
-//				'cartTotal' => sprintf('%01.2f', $cartTotal),
-//				'cartQuantity' => $cartQuantity,
-//				'cartWeight' => $cartWeight,
-//			);
 		}
 		else {
-			return null;
+			return false;
 		}
 	}
 
