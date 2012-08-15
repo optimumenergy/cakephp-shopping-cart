@@ -35,7 +35,7 @@
 <div class="container_24 body">
 <?php echo $this->Session->flash(); ?>
 <?php echo $this->fetch('content'); ?>
-i<?php echo $this->element('sql_dump'); ?>
+<?php echo $this->element('sql_dump'); ?>
 <br /><br />
 <div id="top">
 	<div id="menu">
