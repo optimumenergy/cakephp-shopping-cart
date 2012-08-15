@@ -1,3 +1,22 @@
+<?php
+/**
+ *
+ * PHP 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       Cake.View.Layouts
+ * @since         CakePHP(tm) v 0.10.0.1076
+ * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -5,16 +24,18 @@
 <title><?php echo $title_for_layout; ?></title>
 <?php echo $this->Html->css(array('reset.css', 'css.css', '960_24_col.css')); ?>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <?php echo $this->Html->script(array('js.js', 'search.js')); ?>
-<?php echo $scripts_for_layout; ?>
+<?php echo $this->fetch('meta'); ?>
+<?php echo $this->fetch('css'); ?>
+<?php echo $this->fetch('script'); ?>
 </head>
 <body>
 <div class="container_24 body">
 <?php echo $this->Session->flash(); ?>
-<?php echo $content_for_layout; ?>
-<?php echo $this->element('sql_dump'); ?>
+<?php echo $this->fetch('content'); ?>
+i<?php echo $this->element('sql_dump'); ?>
 <br /><br />
 <div id="top">
 	<div id="menu">
