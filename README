@@ -1,6 +1,6 @@
 A simple Shopping Cart built with CakePHP PHP framework.
 
-- CakePHP 2.1
+- CakePHP 2.2
 - PayPal Express Checkout
 - Google Checkout
 
@@ -15,7 +15,7 @@ cd cakephp-shopping-cart
 git submodule init
 git submodule update
 chmod -R 777 tmp/
-mysql -u username -p password database_name < Config/schema/shop.sql
+mysql -u username -p password database_name < Config/Schema/shop.sql
 cp Config/settings-default.php Config/settings.php
 cp Config/database.php.default Config/database.php
 
