@@ -60,4 +60,5 @@ class OrderItem extends AppModel {
 			'order' => ''
 		)
 	);
+
 }

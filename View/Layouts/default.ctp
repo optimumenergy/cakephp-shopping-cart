@@ -39,7 +39,7 @@
 <br /><br />
 <div id="top">
 	<div id="menu">
-		<h2>AKND</h2>
+		<h2>SHOP</h2>
 		<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?> &nbsp;
 		<?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?>
 	</div>

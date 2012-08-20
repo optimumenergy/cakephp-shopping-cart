@@ -15,15 +15,6 @@ class ProductsController extends AppController {
 //////////////////////////////////////////////////
 
 	public function index() {
-//		$this->Paginator = $this->Components->load('Paginator');
-//		$this->Paginator->settings = array(
-//			'recursive' => -1,
-//			'limit' => 5,
-//			'order' => 'RAND()',
-//			'paramType' => 'querystring',
-//		);
-//		$products = $this->Paginator->paginate();
-
 		$this->paginate = array(
 			'recursive' => -1,
 			'limit' => 5,
@@ -57,12 +48,12 @@ class ProductsController extends AppController {
 		$search = null;
 		if(!empty($this->request->query['search']) || !empty($this->request->data['name'])) {
 			$search = empty($this->request->query['search']) ? $this->request->data['name'] : $this->request->query['search'] ;
-			$search = preg_replace("/[^a-zA-Z0-9 ]/", '', $search);
+			$search = preg_replace('/[^a-zA-Z0-9 ]/', '', $search);
 			$terms = explode(' ', trim($search));
 			$terms = array_diff($terms, array(''));
 			$conditions = array();
 			foreach($terms as $term) {
-				$terms1[] = preg_replace("/[^a-zA-Z0-9]/", '', $term);
+				$terms1[] = preg_replace('/[^a-zA-Z0-9]/', '', $term);
 				$conditions[] = array('Product.name LIKE' => '%' . $term . '%');
 			}
 			$products = $this->Product->find('all', array(
