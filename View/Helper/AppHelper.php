@@ -31,4 +31,22 @@ App::uses('Helper', 'View');
  * @package       app.View.Helper
  */
 class AppHelper extends Helper {
+
+	public $helpers = array(
+		'Html',
+		'Form',
+		'Session',
+		'Js',
+	);
+
+	public function js() {
+		$shop = array();
+		$shop['basePath'] = Router::url('/');
+		$shop['params'] = array(
+			'controller' => $this->params['controller'],
+			'action' => $this->params['action'],
+		);
+		return $this->Html->scriptBlock('var Shop = ' . $this->Js->object($shop) . ';');
+	}
+
 }

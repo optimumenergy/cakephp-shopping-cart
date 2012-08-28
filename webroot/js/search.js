@@ -14,7 +14,7 @@ $(document).ready(function(){
 				return;
 			}
 
-			lastXhr = $.getJSON( "/products/searchjson.json", request, function( data, status, xhr ) {
+			lastXhr = $.getJSON(Shop.basePath + "products/searchjson.json", request, function( data, status, xhr ) {
 				cache[ term ] = data;
 				if ( xhr === lastXhr ) {
 					response( data );
@@ -28,31 +28,27 @@ $(document).ready(function(){
 
 	function reloadSearch() {
 
-		var name = $('#ProductSearch').val();
-
-		// $('#loading').show();
+		var name = $("#ProductSearch").val();
 
 		timeout = setTimeout(function() {
-			$('#all').load('/products/search', {name: name}, function() {
-				// $('#loading').hide();
+			$('#all').load(Shop.basePath + "products/search", {name: name}, function() {
 			});
 			setTimeout(function() {}, 500);
 		}, delay);
 
 	}
 
-	$('#ProductSearch').keyup(function() {
+	$("#ProductSearch").keyup(function() {
 
-		var name = $('#ProductSearch').val();
+		var name = $("#ProductSearch").val();
 
 		if (name.length > 3 && name.length < 40) {
 			if (timeout) {
-	             clearTimeout(timeout);
-	        }
+				clearTimeout(timeout);
+			}
 			reloadSearch();
 		}
 
 	});
-
 
 });
