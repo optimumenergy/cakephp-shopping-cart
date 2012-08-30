@@ -99,7 +99,7 @@ class ProductsController extends AppController {
 				$conditions[] = array('Product.name LIKE' => '%' . $term . '%');
 			}
 			$products = $this->Product->find('all', array(
-	            'conditions' => $conditions,
+				'conditions' => $conditions,
 				'limit' => 200,
 				'recursive' => -1
 			));
