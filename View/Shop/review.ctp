@@ -2,52 +2,69 @@
 
 <h1>Order Review</h1>
 
-<table>
-	<tr>
-		<th colspan="2">ITEM</th>
-		<th class="right">PRICE</th>
-		<th class="right">QUANTITY</th>
-		<th class="right">TOTAL</th>
-	</tr>
-<?php foreach ($shop['Cart']['Items'] as $item): ?>
-	<tr>
-		<td width="80"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60)); ?></td>
-		<td><strong><?php echo $item['Product']['name']; ?></strong></td>
-		<td width="80" class="right">$<?php echo $item['Product']['price']; ?></td>
-		<td width="80" class="right"><?php echo $item['quantity']; ?></td>
-		<td width="80" class="right">$<?php echo $item['subtotal']; ?></td>
-	</tr>
-<?php endforeach; ?>
-</table>
+<hr>
 
-<br />
-<br />
-
-Items: <?php echo $shop['Cart']['Property']['cartQuantity'];?><br />
-Order Total: <span class="bold red">$<?php echo $shop['Cart']['Property']['cartTotal']; ?></span><br />
-
-<br />
+<div class="row">
+<div class="span4">
 
 Name: <?php echo $shop['Data']['name'];?><br />
 Email: <?php echo $shop['Data']['email'];?><br />
 Phone: <?php echo $shop['Data']['phone'];?><br />
-<br />
+
+</div>
+<div class="span4">
+
 Billing Address: <?php echo $shop['Data']['billing_address'];?><br />
 Billing Address 2: <?php echo $shop['Data']['billing_address2'];?><br />
 Billing City: <?php echo $shop['Data']['billing_city'];?><br />
 Billing State: <?php echo $shop['Data']['billing_state'];?><br />
-<br />
+
+</div>
+<div class="span4">
+
 Shipping Address: <?php echo $shop['Data']['shipping_address'];?><br />
 Shipping Address 2: <?php echo $shop['Data']['shipping_address2'];?><br />
 Shipping City: <?php echo $shop['Data']['shipping_city'];?><br />
 Shipping State: <?php echo $shop['Data']['shipping_state'];?><br />
 
+</div>
+</div>
+
+<hr>
+
+<div class="row">
+<div class="span1">#</div>
+<div class="span8">ITEM</div>
+<div class="span1">PRICE</div>
+<div class="span1">QUANTITY</div>
+<div class="span1">SUBTOTAL</div>
+</div>
+
 <br />
 <br />
+
+<?php foreach ($shop['Cart']['Items'] as $item): ?>
+<div class="row">
+<div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
+<div class="span8"><?php echo $item['Product']['name']; ?></div>
+<div class="span1">$<?php echo $item['Product']['price']; ?></div>
+<div class="span1"><?php echo $item['quantity']; ?></div>
+<div class="span1">$<?php echo $item['subtotal']; ?></div>
+</div>
+<?php endforeach; ?>
+
+<hr>
+
+<div class="row">
+	<div class="span2 offset8">Items: <?php echo $shop['Cart']['Property']['cartQuantity']; ?></div>
+	<div class="span2">Order Total: <span class="bold red">$<?php echo $shop['Cart']['Property']['cartTotal']; ?></span></div>
+</div>
+
+<hr>
 
 <?php echo $this->Form->create('Order'); ?>
 
-<?php echo $this->Form->button('Submit Order', array('class' => 'btn btn-primary btn-small')); ?>
+<?php echo $this->Form->button('<i class="icon-thumbs-up icon-white"></i> Submit Order', array('class' => 'btn btn-primary', 'ecape' => false)); ?>
 
 <?php echo $this->Form->end(); ?>
 

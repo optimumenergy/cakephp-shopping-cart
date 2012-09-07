@@ -21,6 +21,7 @@ class ShopController extends AppController {
 
 	public function clear() {
 		$this->Session->delete('Shop');
+		$this->Session->setFlash('All item(s) removed from your shopping cart', 'flash_error');
 		$this->redirect('/');
 	}
 
@@ -32,7 +33,7 @@ class ShopController extends AppController {
 			$product = $this->Cart->add($id, 1);
 		}
 		if(!empty($product)) {
-			$this->Session->setFlash($product['Product']['name'] . ' was added to your shopping cart.');
+			$this->Session->setFlash($product['Product']['name'] . ' was added to your shopping cart.', 'flash_success');
 		}
 		$this->redirect($this->referer());
 	}
@@ -48,7 +49,7 @@ class ShopController extends AppController {
 	public function remove($id = null) {
 		$product = $this->Cart->remove($id);
 		if(!empty($product)) {
-			$this->Session->setFlash($product['Product']['name'] . ' was removed from your shopping cart');
+			$this->Session->setFlash($product['Product']['name'] . ' was removed from your shopping cart', 'flash_error');
 		}
 		$this->redirect(array('action' => 'cart'));
 	}
@@ -62,6 +63,7 @@ class ShopController extends AppController {
 				$p = explode('-', $key);
 				$this->Cart->add($p[1], $value);
 			}
+			$this->Session->setFlash('Shooping Cart is updated.', 'flash_success');
 		}
 		$this->redirect(array('action' => 'cart'));
 	}
@@ -94,6 +96,8 @@ class ShopController extends AppController {
 				$this->Session->write('Shop.Order', $order);
 				$this->Session->write('Shop.Data', $order);
 				$this->redirect(array('action' => 'review'));
+			} else {
+				$this->Session->setFlash('The form could not be saved. Please, try again.', 'flash_error');
 			}
 		}
 		if(!empty($shop['Order'])) {

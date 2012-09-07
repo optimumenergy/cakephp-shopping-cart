@@ -22,6 +22,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php echo $this->Html->css(array('bootstrap.min.css', 'css.css', 'bootstrap-responsive.min.css')); ?>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
@@ -49,23 +50,26 @@
 						<li><?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?></li>
 					</ul>
 				</div>
-				<div class="btn-group pull-right">
-					<?php //echo $this->Form->create('Product', array('type' => 'GET', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
-					<?php //echo $this->Form->input('search', array('label' => false, 'div' => false, 'autocomplete' => 'off')); ?>
-					<?php //echo $this->Form->submit('Search', array('div' => false, 'class' => 'submit')); ?>
-					<?php //echo $this->Form->end(); ?>
-				</div>
+
+				<?php echo $this->Form->create('Product', array('type' => 'GET', 'class' => 'navbar-form pull-right', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
+				<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'autocomplete' => 'off')); ?>
+				<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-primary')); ?>
+				<?php echo $this->Form->end(); ?>
+
 			</div>
 		</div>
 	</div>
 
+	<div id="content">
+		<div class="container">
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->fetch('content'); ?>
+			<br />
+			<br />
+		</div>
+	</div>
+
 	<div class="container">
-		<?php echo $this->Session->flash(); ?>
-		<?php echo $this->fetch('content'); ?>
-
-		<br />
-		<br />
-
 		<div id="footer">
 			<?php echo $this->Html->link($this->Html->image('cake.power.gif', array('alt' => 'CakePHP', 'border' => '0')), 'http://www.cakephp.org/', array('target' => '_blank', 'escape' => false)); ?>
 			<br />
@@ -80,8 +84,11 @@
 			</div>
 		</div>
 
+		<br />
+		<br />
 
 	</div>
+
 
 
 </body>
