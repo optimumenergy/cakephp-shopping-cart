@@ -23,7 +23,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php echo $this->Html->css(array('bootstrap.min.css', 'css.css', 'bootstrap-responsive.min.css')); ?>
+<?php echo $this->Html->css(array('bootstrap.min.css', 'bootstrap-responsive.min.css', 'css.css')); ?>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -60,16 +60,12 @@
 		</div>
 	</div>
 
-	<div id="content">
-		<div class="container">
-			<?php echo $this->Session->flash(); ?>
-			<?php echo $this->fetch('content'); ?>
-			<br />
-			<br />
-		</div>
-	</div>
-
 	<div class="container">
+		<?php echo $this->Session->flash(); ?>
+		<?php echo $this->fetch('content'); ?>
+		<br />
+		<br />
+
 		<div id="footer">
 			<?php echo $this->Html->link($this->Html->image('cake.power.gif', array('alt' => 'CakePHP', 'border' => '0')), 'http://www.cakephp.org/', array('target' => '_blank', 'escape' => false)); ?>
 			<br />
@@ -78,18 +74,12 @@
 			<?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?>
 		</div>
 
-		<div class="row">
-			<div class="span12">
-				<?php echo $this->element('sql_dump'); ?>
-			</div>
-		</div>
-
-		<br />
-		<br />
+		<?php echo $this->element('sql_dump'); ?>
 
 	</div>
 
-
+	<br />
+	<br />
 
 </body>
 </html>
