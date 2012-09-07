@@ -53,7 +53,7 @@ class AppController extends Controller {
 					'password' => 'password'
 				),
 				'scope' => array(
-					'User.is_active' => '1'
+					'User.is_active' => 1
 				)
 			), 'Form'
 		);
