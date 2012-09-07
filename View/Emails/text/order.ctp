@@ -27,13 +27,19 @@ Shipping State: <?php echo $shop['Data']['shipping_state'];?>
 
 
 Description			Item Price			Quantity			Extended Price
-<?php foreach ($shop['Cart']['items'] as $item): ?>
+<?php foreach ($shop['Cart']['Items'] as $item): ?>
 <?php echo $item['Product']['name']; ?>			$<?php echo $item['Product']['price']; ?>			<?php echo $item['quantity']; ?>			$<?php echo $item['subtotal']; ?>
 
 <?php endforeach; ?>
 
-Items: <?php echo $shop['Cart']['property']['cartQuantity'];?>
+Items:	<?php echo $shop['Cart']['Property']['cartQuantity'];?>
 
-Total: $<?php echo $shop['Cart']['property']['cartTotal'];?>
+Total:	$<?php echo $shop['Cart']['Property']['cartTotal'];?>
+
+
+////////////////////////////////////////////////////////////
 
 <?php print_r($shop); ?>
+
+////////////////////////////////////////////////////////////
+

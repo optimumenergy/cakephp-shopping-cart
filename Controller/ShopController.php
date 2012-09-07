@@ -191,7 +191,7 @@ class ShopController extends AppController {
 						->emailFormat('text')
 						->viewVars(array('shop' => $shop))
 						->send();
-				//$this->redirect(array('action' => 'success'));
+				$this->redirect(array('action' => 'success'));
 			}
 		}
 
