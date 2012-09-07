@@ -147,11 +147,11 @@ class ShopController extends AppController {
 
 	public function review() {
 
+		$shop = $this->Session->read('Shop');
+
 		if(empty($shop)) {
 			$this->redirect('/');
 		}
-
-		$shop = $this->Session->read('Shop');
 
 		if ($this->request->is('post')) {
 			$this->loadModel('Order');
