@@ -1,6 +1,7 @@
 <?php
 
 define('WEBSITE', 'http://www.yourdomain.com');
+define('ADMIN_EMAIL', 'sales@yourdomain.com');
 
 //PayPal
 define('API_USERNAME', '');
