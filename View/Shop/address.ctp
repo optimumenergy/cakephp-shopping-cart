@@ -34,7 +34,7 @@
 
 <br />
 
-<?php echo $this->Form->button('Submit'); ?>
+<?php echo $this->Form->button('Continue', array('class' => 'btn btn-primary btn-small'));?>
 
 <?php echo $this->Form->end(); ?>
 

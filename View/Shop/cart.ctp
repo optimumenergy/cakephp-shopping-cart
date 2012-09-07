@@ -1,15 +1,14 @@
 <?php echo $this->set('title_for_layout', 'Shopping Cart'); ?>
 
-<?php echo $this->Html->script(array('cart.js')); ?>
+<?php echo $this->Html->script(array('cart.js'), array('inline' => false)); ?>
 
-<div class="grid_24">
 
 <h1>Shopping Cart</h1>
 
 <?php if(empty($items)) : ?>
+
 Shopping Cart is empty
-</div>
-<div class="clear"></div>
+
 <?php else: ?>
 
 <?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'cartupdate'))); ?>
@@ -28,7 +27,7 @@ Shopping Cart is empty
 		<td><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60)); ?></td>
 		<td><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></td>
 		<td class="right">$<?php echo $item['Product']['price']; ?></td>
-		<td class="right"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric', 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></td>
+		<td class="right"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric span1', 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></td>
 		<td class="right">$<?php echo $item['subtotal']; ?></td>
 		<td class="center"><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></td>
 	</tr>
@@ -53,7 +52,8 @@ Shopping Cart is empty
 		Order Total: <span class="red">$<?php echo $cartTotal; ?></span>
 		<br />
 		<br />
-		<?php echo $this->Form->button('Recalculate'); ?>
+		<?php echo $this->Form->button('Recalculate', array('class' => 'btn btn-primary btn-small'));?>
+
 		<?php echo $this->Form->end(); ?>
 	</p>
 </div>
@@ -61,7 +61,7 @@ Shopping Cart is empty
 <br />
 <div class="grid_24">
 	<div class="grid_4 alpha">
-		<p><?php echo $this->Html->link('Clear Shopping Cart', array('controller' => 'shop', 'action' => 'clear')); ?></p>
+		<p><?php echo $this->Html->link('Clear Shopping Cart', array('controller' => 'shop', 'action' => 'clear'), array('class' => 'btn btn-danger btn-small')); ?></p>
 	</div>
 	<div class="grid_20 omega">
 		<table style="float:right;">
@@ -71,7 +71,7 @@ Shopping Cart is empty
 				<td>
 					<p class="bold left">
 
-					<?php echo $this->Html->link('Proceed to Checkout', array('controller' => 'shop', 'action' => 'address')); ?>
+					<?php echo $this->Html->link('Proceed to Checkout', array('controller' => 'shop', 'action' => 'address'), array('class' => 'btn btn-primary btn-small')); ?>
 
 					<br />
 					<br />

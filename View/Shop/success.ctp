@@ -3,7 +3,9 @@
 <br />
 <br />
 
-<?php debug($shop); ?>
+<pre>
+	<?php debug($shop); ?>
+</pre>
 
 <br />
 <br />

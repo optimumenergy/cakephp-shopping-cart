@@ -1,8 +1,5 @@
 <?php echo $this->set('title_for_layout', 'Order Review'); ?>
 
-
-<div class="grid_24">
-
 <h1>Order Review</h1>
 
 <table>
@@ -50,12 +47,10 @@ Shipping State: <?php echo $shop['Data']['shipping_state'];?><br />
 
 <?php echo $this->Form->create('Order'); ?>
 
-<?php echo $this->Form->button('Submit Order'); ?>
+<?php echo $this->Form->button('Submit Order', array('class' => 'btn btn-primary btn-small')); ?>
 
 <?php echo $this->Form->end(); ?>
 
 <br />
 <br />
 
-</div>
-<div class="clear"></div>
