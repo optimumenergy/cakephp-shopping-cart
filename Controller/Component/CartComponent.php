@@ -3,11 +3,11 @@ class CartComponent extends Component {
 
 //////////////////////////////////////////////////
 
-   	public $components = array('Session');
+	public $components = array('Session');
 
 //////////////////////////////////////////////////
 
-    public $controller = null;
+	public $controller = null;
 
 //////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ class CartComponent extends Component {
 
 //////////////////////////////////////////////////
 
-    public function add($id, $quantity = 1) {
+	public function add($id, $quantity = 1) {
 
 		if(!is_numeric($quantity)) {
 			$quantity = 1;
@@ -58,7 +58,7 @@ class CartComponent extends Component {
 
 //////////////////////////////////////////////////
 
-    public function remove($id) {
+	public function remove($id) {
 		if($this->Session->check('Shop.Cart.Items.' . $id)) {
 			$product = $this->Session->read('Shop.Cart.Items.' . $id);
 			$this->Session->delete('Shop.Cart.Items.' . $id);
@@ -66,7 +66,7 @@ class CartComponent extends Component {
 			return $product;
 		}
 		return false;
-}
+	}
 
 //////////////////////////////////////////////////
 

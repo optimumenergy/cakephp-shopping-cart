@@ -57,7 +57,7 @@ class ProductsController extends AppController {
 				$conditions[] = array('Product.name LIKE' => '%' . $term . '%');
 			}
 			$products = $this->Product->find('all', array(
-	            'conditions' => $conditions,
+				'conditions' => $conditions,
 				'limit' => 200,
 				'recursive' => -1
 			));
@@ -72,16 +72,16 @@ class ProductsController extends AppController {
 		if ($this->request->is('ajax')) {
 			$this->layout = false;
 			$this->set('ajax', 1);
-	    } else {
+		} else {
 			$this->set('ajax', 0);
 		}
 
 		$this->set('title_for_layout', 'Search');
 
-	    $description = 'Search';
+		$description = 'Search';
 		$this->set(compact('description'));
 
-	    $keywords = 'search';
+		$keywords = 'search';
 		$this->set(compact('keywords'));
 	}
 

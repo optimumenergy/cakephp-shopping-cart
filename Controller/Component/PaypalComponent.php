@@ -3,22 +3,22 @@ class PaypalComponent extends Component {
 
 //////////////////////////////////////////////////
 
-   	public $components = array('Session');
+	public $components = array('Session');
 
 //////////////////////////////////////////////////
 
-    public $controller = null;
+	public $controller = null;
 
 //////////////////////////////////////////////////
 
 	public $API_Endpoint = "https://api-3t.sandbox.paypal.com/nvp";
 	public $PAYPAL_URL = "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token=";
-		
+
 //////////////////////////////////////////////////
 
-    public function initialize(&$controller) {
+	public function initialize(&$controller) {
 
-		$this->API_UserName = API_USERNAME; 
+		$this->API_UserName = API_USERNAME;
 		$this->API_Password = API_PASSWORD;
 		$this->API_Signature = API_SIGNATURE;
 		$this->version = 64;
@@ -28,7 +28,7 @@ class PaypalComponent extends Component {
 		$this->paymentType = 'Sale';
 		$this->currencyCodeType = 'USD';
 		$this->sBNCode = 'PP-ECWizard';
-		
+
 	}
 
 //////////////////////////////////////////////////
@@ -46,7 +46,7 @@ class PaypalComponent extends Component {
 			$this->controller->redirect($this->PAYPAL_URL . $resArray["TOKEN"]);
 		}
 	}
-	
+
 //////////////////////////////////////////////////
 
 	public function CallShortcutExpressCheckout($paymentAmount) {
@@ -55,25 +55,25 @@ class PaypalComponent extends Component {
 		$nvpstr .= "&RETURNURL=" . $this->returnURL;
 		$nvpstr .= "&CANCELURL=" . $this->cancelURL;
 		$nvpstr .= "&PAYMENTREQUEST_0_CURRENCYCODE=" . $this->currencyCodeType;
-		$this->Session->write('Shop.Paypal.currencyCodeType', $this->currencyCodeType);    
-		$this->Session->write('Shop.Paypal.PaymentType', $this->paymentType);    
-	    $resArray = $this->hash_call("SetExpressCheckout", $nvpstr);
+		$this->Session->write('Shop.Paypal.currencyCodeType', $this->currencyCodeType);
+		$this->Session->write('Shop.Paypal.PaymentType', $this->paymentType);
+		$resArray = $this->hash_call("SetExpressCheckout", $nvpstr);
 		$ack = strtoupper($resArray["ACK"]);
 		if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
 			$token = urldecode($resArray["TOKEN"]);
-			$this->Session->write('Shop.Paypal.TOKEN', $token);    
+			$this->Session->write('Shop.Paypal.TOKEN', $token);
 		}
-	    return $resArray;
+		return $resArray;
 	}
 
 //////////////////////////////////////////////////
 
 	public function GetShippingDetails($token) {
-	    $resArray = $this->hash_call('GetExpressCheckoutDetails', '&TOKEN=' . $token);
-	    $ack = strtoupper($resArray['ACK']);
-		if($ack == 'SUCCESS' || $ack == 'SUCCESSWITHWARNING') {	
-			$this->Session->write('Shop.Paypal.payer_id', $resArray['PAYERID']);    
-		} 
+		$resArray = $this->hash_call('GetExpressCheckoutDetails', '&TOKEN=' . $token);
+		$ack = strtoupper($resArray['ACK']);
+		if($ack == 'SUCCESS' || $ack == 'SUCCESSWITHWARNING') {
+			$this->Session->write('Shop.Paypal.payer_id', $resArray['PAYERID']);
+		}
 		return $resArray;
 	}
 
@@ -87,14 +87,14 @@ class PaypalComponent extends Component {
 		$payerID 			= urlencode($paypal['payer_id']);
 		$serverName 		= urlencode($_SERVER['SERVER_NAME']);
 		$nvpstr  = '&TOKEN=' . $token . '&PAYERID=' . $payerID . '&PAYMENTREQUEST_0_PAYMENTACTION=' . $paymentType . '&PAYMENTREQUEST_0_AMT=' . $FinalPaymentAmt;
-		$nvpstr .= '&PAYMENTREQUEST_0_CURRENCYCODE=' . $currencyCodeType . '&IPADDRESS=' . $serverName; 
+		$nvpstr .= '&PAYMENTREQUEST_0_CURRENCYCODE=' . $currencyCodeType . '&IPADDRESS=' . $serverName;
 
 		debug($nvpstr);
 
 		$resArray = $this->hash_call("DoExpressCheckoutPayment", $nvpstr);
-		
+
 		debug($resArray);
-		
+
 		$ack = strtoupper($resArray["ACK"]);
 		return $resArray;
 	}
@@ -120,19 +120,19 @@ class PaypalComponent extends Component {
 		$nvpResArray = $this->deformatNVP($response);
 		$nvpReqArray = $this->deformatNVP($nvpreq);
 		if (curl_errno($ch)) {
-			$this->Session->write('Shop.Paypal.curl_error_no', curl_errno($ch));    
-			$this->Session->write('Shop.Paypal.curl_error_msg', curl_error($ch));    
+			$this->Session->write('Shop.Paypal.curl_error_no', curl_errno($ch));
+			$this->Session->write('Shop.Paypal.curl_error_msg', curl_error($ch));
 		} else {
-		  	curl_close($ch);
+			curl_close($ch);
 		}
 		return $nvpResArray;
 	}
-	
+
 //////////////////////////////////////////////////
 
 	public function deformatNVP($nvpstr) {
 		$intial = 0;
-	 	$nvpArray = array();
+		$nvpArray = array();
 		while(strlen($nvpstr)) {
 			$keypos= strpos($nvpstr, '=');
 			$valuepos = strpos($nvpstr, '&') ? strpos($nvpstr, '&') : strlen($nvpstr);
@@ -140,7 +140,7 @@ class PaypalComponent extends Component {
 			$valval = substr($nvpstr, $keypos + 1, $valuepos - $keypos - 1);
 			$nvpArray[urldecode($keyval)] = urldecode($valval);
 			$nvpstr = substr($nvpstr, $valuepos + 1, strlen($nvpstr));
-	     }
+		}
 		return $nvpArray;
 	}
 
