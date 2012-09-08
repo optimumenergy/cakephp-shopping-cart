@@ -90,8 +90,8 @@ class ProductsController extends AppController {
 	public function searchjson() {
 
 		$search = null;
-		if(!empty($this->request->query['term'])) {
-			$search = $this->request->query['term'];
+		if(!empty($this->request->query['search'])) {
+			$search = $this->request->query['search'];
 			$terms = explode(' ', trim($search));
 			$terms = array_diff($terms, array(''));
 			$conditions = array();
@@ -99,15 +99,22 @@ class ProductsController extends AppController {
 				$conditions[] = array('Product.name LIKE' => '%' . $term . '%');
 			}
 			$products = $this->Product->find('all', array(
+				'fields' => array(
+					'Product.name',
+					'Product.image'
+				),
 				'conditions' => $conditions,
 				'limit' => 200,
 				'recursive' => -1
 			));
-			foreach($products as $product) {
-				$products1[] = $product['Product']['name'];
-			}
-			$this->set(compact('products1'));
+//			foreach($products as $product) {
+//				$products1[] = $product['Product']['name'];
+//			}
+//			$this->set(compact('products1'));
 		}
+
+		echo json_encode($products);
+		$this->autoRender = false;
 	}
 
 //////////////////////////////////////////////////
