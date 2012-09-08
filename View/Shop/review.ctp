@@ -11,6 +11,8 @@ Name: <?php echo $shop['Data']['name'];?><br />
 Email: <?php echo $shop['Data']['email'];?><br />
 Phone: <?php echo $shop['Data']['phone'];?><br />
 
+<br />
+
 </div>
 <div class="span4">
 
@@ -19,6 +21,8 @@ Billing Address 2: <?php echo $shop['Data']['billing_address2'];?><br />
 Billing City: <?php echo $shop['Data']['billing_city'];?><br />
 Billing State: <?php echo $shop['Data']['billing_state'];?><br />
 
+<br />
+
 </div>
 <div class="span4">
 
@@ -26,6 +30,8 @@ Shipping Address: <?php echo $shop['Data']['shipping_address'];?><br />
 Shipping Address 2: <?php echo $shop['Data']['shipping_address2'];?><br />
 Shipping City: <?php echo $shop['Data']['shipping_city'];?><br />
 Shipping State: <?php echo $shop['Data']['shipping_state'];?><br />
+
+<br />
 
 </div>
 </div>

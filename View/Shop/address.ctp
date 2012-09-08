@@ -5,6 +5,8 @@
 
 <?php echo $this->Form->create('Order'); ?>
 
+<hr>
+
 <div class="row">
 <div class="span4">
 
@@ -13,6 +15,8 @@
 <?php echo $this->Form->input('email', array('class' => 'span3')); ?>
 
 <?php echo $this->Form->input('phone', array('class' => 'span3')); ?>
+
+<br />
 
 </div>
 <div class="span4">
@@ -25,6 +29,8 @@
 
 <?php echo $this->Form->input('billing_state', array('class' => 'span3')); ?>
 
+<br />
+
 </div>
 <div class="span4">
 
@@ -36,10 +42,11 @@
 
 <?php echo $this->Form->input('shipping_state', array('class' => 'span3')); ?>
 
+<br />
+
 </div>
 </div>
 
-<br />
 <br />
 
 <?php echo $this->Form->button('<i class="icon-arrow-right icon-white"></i> Continue', array('class' => 'btn btn-primary', 'escape' => false));?>

@@ -13,6 +13,8 @@ Shopping Cart is empty
 
 <?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'cartupdate'))); ?>
 
+<hr>
+
 <div class="row">
 	<div class="span1">#</div>
 	<div class="span7">ITEM</div>
@@ -33,6 +35,7 @@ Shopping Cart is empty
 	</div>
 <?php endforeach; ?>
 
+<hr>
 
 <div class="row">
 	<div class="span2 offset8">
@@ -43,6 +46,8 @@ Shopping Cart is empty
 		<?php echo $this->Form->end(); ?>
 	</div>
 </div>
+
+<hr>
 
 <div class="row">
 	<div class="span2 offset10">
