@@ -2,12 +2,17 @@ A simple Shopping Cart built with CakePHP PHP framework.
 
 - CakePHP 2.2 rapid development php framework
 - Twitter Bootstrap front-end framework
+- jQuery, jQuery UI JavaScript Library
 - PayPal Express Checkout
 - Google Checkout
 
 Incomplete !
 
+////////////////////////////////////////////////////////////////////
+
 Demo: http://w1.kende.com/
+
+////////////////////////////////////////////////////////////////////
 
 Installation:
 
@@ -19,4 +24,8 @@ chmod -R 777 tmp/
 mysql -u username -p password database_name < Config/Schema/shop.sql
 cp Config/settings-default.php Config/settings.php
 cp Config/database.php.default Config/database.php
+
+////////////////////////////////////////////////////////////////////
+
+Andras Kende http://www.kende.com/
 
