@@ -2,17 +2,17 @@
 App::uses('AppController', 'Controller');
 class ProductsController extends AppController {
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public $components = array('RequestHandler');
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public function index() {
 		$this->paginate = array(
@@ -26,7 +26,7 @@ class ProductsController extends AppController {
 		$this->set(compact('products'));
 	}
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public function view($id = null) {
 
@@ -41,7 +41,7 @@ class ProductsController extends AppController {
 
 	}
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public function search() {
 
@@ -85,7 +85,7 @@ class ProductsController extends AppController {
 		$this->set(compact('keywords'));
 	}
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public function searchjson() {
 
@@ -117,7 +117,7 @@ class ProductsController extends AppController {
 		$this->autoRender = false;
 	}
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public function sitemap() {
 		$products = $this->Product->find('all', array(
@@ -130,6 +130,76 @@ class ProductsController extends AppController {
 		$this->response->type('xml');
 	}
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+	public function admin_index() {
+		$this->Product->recursive = 0;
+		$this->set('products', $this->paginate());
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function admin_view($id = null) {
+		if (!$this->Product->exists($id)) {
+			throw new NotFoundException(__('Invalid product'));
+		}
+		$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
+		$this->set('product', $this->Product->find('first', $options));
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function admin_add() {
+		if ($this->request->is('post')) {
+			$this->Product->create();
+			if ($this->Product->save($this->request->data)) {
+				$this->Session->setFlash(__('The product has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
+			}
+		}
+		$categories = $this->Product->Category->find('list');
+		$this->set(compact('categories'));
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function admin_edit($id = null) {
+		if (!$this->Product->exists($id)) {
+			throw new NotFoundException(__('Invalid product'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->Product->save($this->request->data)) {
+				$this->Session->setFlash(__('The product has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
+			$this->request->data = $this->Product->find('first', $options);
+		}
+		$categories = $this->Product->Category->find('list');
+		$this->set(compact('categories'));
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function admin_delete($id = null) {
+		$this->Product->id = $id;
+		if (!$this->Product->exists()) {
+			throw new NotFoundException(__('Invalid product'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Product->delete()) {
+			$this->Session->setFlash(__('Product deleted'));
+			$this->redirect(array('action' => 'index'));
+		}
+		$this->Session->setFlash(__('Product was not deleted'));
+		$this->redirect(array('action' => 'index'));
+	}
+
+////////////////////////////////////////////////////////////
 
 }
