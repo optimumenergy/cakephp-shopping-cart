@@ -4,9 +4,53 @@ class CategoriesController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
-	public function index() {
-		$data = $this->Category->generateTreeList(null, null, null, ' --- ');
+	public function index($id = null) {
+
+		$data = $this->Category->generateTreeList();
 		debug($data);
+
+		$product = $this->Category->Product->find('first', array(
+			'conditions' => array('Product.id' => $id)
+		));
+		debug($product);
+
+		$category = $this->Category->find('first', array(
+			'conditions' => array('Category.id' => $product['Product']['category_id'])
+		));
+		debug($category);
+
+		$allChildren = $this->Category->children($product['Product']['category_id']);
+		debug($allChildren);
+
+		$path = $this->Category->getPath($product['Product']['category_id']);
+		debug($path);
+
+		$parent = $this->Category->getParentNode($product['Product']['category_id']);
+		debug($parent);
+
+		$test = $this->Category->find('threaded', array(
+			'conditions' => array(
+				'Category.lft >=' => $category['Category']['lft'],
+				'Category.rght <=' => $category['Category']['rght'],
+			),
+			'contain' => array(
+				'Product' => array(
+					'conditions' => array('Product.name >' => '')
+				)
+			)
+		));
+		debug($test);
+
+		$all = $this->Category->Product->find('threaded', array(
+			'conditions' => array('Product.category_id !=' => 0),
+			'contain' => array(
+				'Category' => array(
+//					'conditions' => array('Product.name >' => '')
+				)
+			)
+		));
+		debug($all);
+
 		die();
 	}
 
