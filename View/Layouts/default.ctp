@@ -23,7 +23,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php echo $this->Html->css(array('bootstrap.min.css', 'bootstrap-responsive.min.css', 'css.css')); ?>
+<?php echo $this->Html->css(array('bootstrap.css', 'bootstrap-responsive.css', 'css.css')); ?>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
