@@ -13,7 +13,8 @@ class CategoryTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.category'
+		'app.category',
+		'app.product'
 	);
 
 /**

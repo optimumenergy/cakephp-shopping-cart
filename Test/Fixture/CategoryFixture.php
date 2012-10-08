@@ -36,8 +36,8 @@ class CategoryFixture extends CakeTestFixture {
 			'lft' => 1,
 			'rght' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
-			'created' => '2012-10-07 23:44:11',
-			'modified' => '2012-10-07 23:44:11'
+			'created' => '2012-10-08 01:05:03',
+			'modified' => '2012-10-08 01:05:03'
 		),
 	);
 
