@@ -24,12 +24,13 @@ Shopping Cart is empty
 	<div class="span1">REMOVE</div>
 </div>
 
+<?php $tab = 1; ?>
 <?php foreach ($items as $item): ?>
 	<div class="row">
 		<div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('class' => 'px60')); ?></div>
 		<div class="span7"><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></div>
 		<div class="span1">$<?php echo $item['Product']['price']; ?></div>
-		<div class="span1"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric span1', 'label' => false, 'size' => 2, 'maxlength' => 2, 'value' => $item['quantity'])); ?></div>
+		<div class="span1"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric span1', 'label' => false, 'size' => 2, 'maxlength' => 2, 'tabindex' => $tab++, 'value' => $item['quantity'])); ?></div>
 		<div class="span1">$<?php echo $item['subtotal']; ?></div>
 		<div class="span1"><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></div>
 	</div>
