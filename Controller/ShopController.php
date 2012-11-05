@@ -55,6 +55,16 @@ class ShopController extends AppController {
 		$this->redirect(array('action' => 'cart'));
 	}
 
+//////////////////////////////////////////////////
+
+	public function itemupdate() {
+		if ($this->request->is('ajax')) {
+			$this->Cart->add($this->request->data['id'], $this->request->data['quantity']);
+		}
+		$cart = $this->Session->read('Shop.Cart');
+		echo json_encode($cart);
+		$this->autoRender = false;
+	}
 
 //////////////////////////////////////////////////
 
