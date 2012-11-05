@@ -6,11 +6,6 @@
 			<?php echo h($product['Product']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Category'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($product['Category']['name'], array('controller' => 'categories', 'action' => 'view', $product['Category']['id'])); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Name'); ?></dt>
 		<dd>
 			<?php echo h($product['Product']['name']); ?>
