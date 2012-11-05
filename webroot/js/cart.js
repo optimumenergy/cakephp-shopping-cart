@@ -22,8 +22,15 @@ $(document).ready(function(){
 			dataType: "json",
 			success: function(data) {
 
+				var subtotalCalc = $('#price-' + id).html() * quantity;
+				var subtotalUpdated = subtotalCalc.toFixed(2);
+
+				$('#subtotal-' + id).html(subtotalUpdated);
+
 				$('#carttotal').html('$' + data.Property.cartTotal);
 				$('#ordertotal').html('$' + data.Property.cartTotal);
+
+
 				//$("#cart tr .quantity input[name*=" + orderCode + "]").parent().parent().find("td").animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: startColor }, 800);
 				//calcPrice();
 			},
