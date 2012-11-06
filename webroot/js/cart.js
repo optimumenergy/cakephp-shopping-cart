@@ -9,6 +9,10 @@ $(document).ready(function(){
 
 	$('.numeric').keyup(function(event) {
 
+		if(/\d/.test(String.fromCharCode(event.keyCode)) == false) {
+			return false;
+		};
+
 		var id = $(this).attr("data-id");
 		var quantity = $(this).val();
 
