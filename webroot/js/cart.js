@@ -32,9 +32,10 @@ $(document).ready(function(){
 				dataType: "json",
 				success: function(data) {
 
-					$.each(data.Items, function(key, val) {
-						if($('#subtotal-' + key).html() != val.subtotal) {
-							$('#subtotal-' + key).html(val.subtotal).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
+					$.each(data.Items, function(key, value) {
+						if($('#subtotal-' + key).html() != value.subtotal) {
+							$('#ProductQuantity-' + key).val(value.quantity);
+							$('#subtotal-' + key).html(value.subtotal).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
 						}
 					});
 
