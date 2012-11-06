@@ -44,6 +44,8 @@ class CartComponent extends Component {
 		if(empty($product)) {
 			return false;
 		}
+		$data['price'] = $product['Product']['price'];
+		$data['weight'] = $product['Product']['weight'];
 		$data['quantity'] = $quantity;
 		$data['subtotal'] = sprintf('%01.2f', $product['Product']['price'] * $quantity);
 		$data['totalweight'] = sprintf('%01.2f', $product['Product']['weight'] * $quantity);
@@ -89,6 +91,10 @@ class CartComponent extends Component {
 			return true;
 		}
 		else {
+			$d['cartTotal'] = 0;
+			$d['cartQuantity'] = 0;
+			$d['cartWeight'] = 0;
+			$this->Session->write('Shop.Cart.Property', $d);
 			return false;
 		}
 	}

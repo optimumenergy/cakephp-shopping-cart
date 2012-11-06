@@ -26,7 +26,7 @@ Shopping Cart is empty
 
 <?php $tabindex = 1; ?>
 <?php foreach ($items as $item): ?>
-	<div class="row">
+	<div class="row" id="row-<?php echo $item['Product']['id']; ?>">
 		<div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('class' => 'px60')); ?></div>
 		<div class="span7"><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></div>
 		<div class="span1" id="price-<?php echo $item['Product']['id']; ?>"><?php echo $item['Product']['price']; ?></div>
