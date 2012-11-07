@@ -41,6 +41,17 @@ class ShopController extends AppController {
 
 //////////////////////////////////////////////////
 
+	public function itemupdate() {
+		if ($this->request->is('ajax')) {
+			$this->Cart->add($this->request->data['id'], $this->request->data['quantity']);
+		}
+		$cart = $this->Session->read('Shop.Cart');
+		echo json_encode($cart);
+		$this->autoRender = false;
+	}
+
+//////////////////////////////////////////////////
+
 	public function update() {
 		$this->Cart->update($this->request->data['Product']['id'], 1);
 	}
@@ -53,17 +64,6 @@ class ShopController extends AppController {
 			$this->Session->setFlash($product['Product']['name'] . ' was removed from your shopping cart', 'flash_error');
 		}
 		$this->redirect(array('action' => 'cart'));
-	}
-
-//////////////////////////////////////////////////
-
-	public function itemupdate() {
-		if ($this->request->is('ajax')) {
-			$this->Cart->add($this->request->data['id'], $this->request->data['quantity']);
-		}
-		$cart = $this->Session->read('Shop.Cart');
-		echo json_encode($cart);
-		$this->autoRender = false;
 	}
 
 //////////////////////////////////////////////////

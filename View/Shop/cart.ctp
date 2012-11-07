@@ -2,7 +2,6 @@
 
 <?php echo $this->Html->script(array('cart.js'), array('inline' => false)); ?>
 
-
 <h1>Shopping Cart</h1>
 
 <?php if(empty($items)) : ?>
