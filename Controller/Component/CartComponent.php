@@ -44,6 +44,7 @@ class CartComponent extends Component {
 		if(empty($product)) {
 			return false;
 		}
+		$data['product_id'] = $product['Product']['id'];
 		$data['name'] = $product['Product']['name'];
 		$data['weight'] = $product['Product']['weight'];
 		$data['price'] = $product['Product']['price'];
