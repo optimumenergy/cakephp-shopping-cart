@@ -31,8 +31,8 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?>
 
 
 Description			Item Price			Quantity			Extended Price
-<?php foreach ($shop['Items'] as $item): ?>
-<?php echo $item['Product']['name']; ?>			$<?php echo $item['Product']['price']; ?>			<?php echo $item['quantity']; ?>			$<?php echo $item['subtotal']; ?>
+<?php foreach ($shop['OrderItem'] as $orderitem): ?>
+<?php echo $orderitem['Product']['name']; ?>			$<?php echo $orderitem['Product']['price']; ?>			<?php echo $orderitem['quantity']; ?>			$<?php echo $orderitem['subtotal']; ?>
 
 <?php endforeach; ?>
 
