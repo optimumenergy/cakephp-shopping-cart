@@ -14,7 +14,9 @@ class OrdersController extends AppController {
 		}
 		$order = $this->Order->find('first', array(
 			'recursive' => 1,
-			'conditions' => array('Order.id' => $id)
+			'conditions' => array(
+				'Order.id' => $id
+			)
 		));
 		$this->set(compact('order'));
 	}
