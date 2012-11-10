@@ -81,6 +81,7 @@ class CartComponent extends Component {
 		$weight = 0;
 		$subtotal = 0;
 		$total = 0;
+		$order_item_count = 0;
 
 		if (count($shop['OrderItem']) > 0) {
 			foreach ($shop['OrderItem'] as $item) {
@@ -88,9 +89,11 @@ class CartComponent extends Component {
 				$weight += $item['totalweight'];
 				$subtotal += $item['subtotal'];
 				$total += $item['subtotal'];
+				$order_item_count++;
 			}
+			$d['order_item_count'] = $order_item_count;
 			$d['quantity'] = $quantity;
-			$d['weight'] = $weight;
+			$d['weight'] = sprintf('%01.2f', $weight);
 			$d['subtotal'] = sprintf('%01.2f', $subtotal);
 			$d['total'] = sprintf('%01.2f', $total);
 			$this->Session->write('Shop.Order', $d + $shop['Order']);

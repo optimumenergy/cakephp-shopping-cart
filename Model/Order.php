@@ -96,7 +96,6 @@ class Order extends AppModel {
 			),
 		),
 
-
 	);
 
 //////////////////////////////////////////////////
@@ -113,7 +112,8 @@ class Order extends AppModel {
 			'offset' => '',
 			'exclusive' => '',
 			'finderQuery' => '',
-			'counterQuery' => ''
+			'counterQuery' => '',
+			'counterCache' => true
 		)
 	);
 
