@@ -113,7 +113,6 @@ class Order extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => '',
-			'counterCache' => true
 		)
 	);
 

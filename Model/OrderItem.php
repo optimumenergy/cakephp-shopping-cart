@@ -1,16 +1,9 @@
 <?php
 App::uses('AppModel', 'Model');
-/**
- * OrderItem Model
- *
- * @property Order $Order
- */
 class OrderItem extends AppModel {
-/**
- * Validation rules
- *
- * @var array
- */
+
+//////////////////////////////////////////////////
+
 	public $validate = array(
 		'order_id' => array(
 			'numeric' => array(
@@ -44,21 +37,20 @@ class OrderItem extends AppModel {
 		),
 	);
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+//////////////////////////////////////////////////
 
-/**
- * belongsTo associations
- *
- * @var array
- */
 	public $belongsTo = array(
 		'Order' => array(
 			'className' => 'Order',
 			'foreignKey' => 'order_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
+			'counterCache' => true,
+			'counterScope' => array(),
 		)
 	);
+
+//////////////////////////////////////////////////
 
 }
