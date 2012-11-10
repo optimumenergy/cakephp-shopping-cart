@@ -7,7 +7,7 @@ $(document).ready(function(){
 		return /\d/.test(String.fromCharCode(event.keyCode));
 	});
 
-	$('.numeric').on('keyup change', function(event) {
+	$('.numeric').on('keyup change blur', function(event) {
 
 		if(/\d/.test(String.fromCharCode(event.keyCode)) == false) {
 			return false;
@@ -53,11 +53,11 @@ $(document).ready(function(){
 				$('#carttotal').html('$' + data.Property.cartTotal).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
 				$('#ordertotal').html('$' + data.Property.cartTotal).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
 				if(data.Property.cartTotal == 0) {
-					window.location.replace(Shop.basePath + "shop/cart");
+					window.location.replace(Shop.basePath + "shop/clear");
 				}
 			},
 			error: function() {
-				window.location.replace(Shop.basePath + "shop/cart");
+				window.location.replace(Shop.basePath + "shop/clear");
 			}
 		});
 	}
