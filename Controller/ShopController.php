@@ -45,7 +45,7 @@ class ShopController extends AppController {
 		if ($this->request->is('ajax')) {
 			$this->Cart->add($this->request->data['id'], $this->request->data['quantity']);
 		}
-		$cart = $this->Session->read('Shop.Cart');
+		$cart = $this->Session->read('Shop');
 		echo json_encode($cart);
 		$this->autoRender = false;
 	}
@@ -83,7 +83,7 @@ class ShopController extends AppController {
 
 	public function cart() {
 		$this->helpers[] = 'Google';
-		$cart = $this->Session->read('Shop.Cart');
+		$cart = $this->Session->read('Shop');
 		$this->set('items', $cart['OrderItem']);
 		$this->set('cartTotal', $cart['Property']['cartTotal']);
 	}
@@ -93,7 +93,7 @@ class ShopController extends AppController {
 	public function address() {
 
 		$shop = $this->Session->read('Shop');
-		if(!$shop['Cart']['Property']['cartTotal']) {
+		if(!$shop['Property']['cartTotal']) {
 			$this->redirect('/');
 		}
 
@@ -119,7 +119,7 @@ class ShopController extends AppController {
 //////////////////////////////////////////////////
 
 	public function step1() {
-		$paymentAmount = $this->Session->read('Shop.Cart.Property.cartTotal');
+		$paymentAmount = $this->Session->read('Shop.Property.cartTotal');
 		if(!$paymentAmount) {
 			$this->redirect('/');
 		}
@@ -166,26 +166,27 @@ class ShopController extends AppController {
 			$this->loadModel('Order');
 
 			$i = 0;
-			foreach($shop['Cart']['OrderItem'] as $c) {
+			foreach($shop['OrderItem'] as $c) {
 				$o['OrderItem'][$i]['name'] = $c['Product']['name'];
 				$o['OrderItem'][$i]['quantity'] = $c['quantity'];
 				$o['OrderItem'][$i]['price'] = $c['subtotal'];
+				$o['OrderItem'][$i]['subtotal'] = $c['quantity'] * $c['price'];
 				$o['OrderItem'][$i]['weight'] = $c['totalweight'];
 				$i++;
 			}
 
 			$o['Order'] = $shop['Order'];
-			$o['Order']['subtotal'] = $shop['Cart']['Property']['cartTotal'];
-			$o['Order']['total'] = $shop['Cart']['Property']['cartTotal'];
-			$o['Order']['weight'] = $shop['Cart']['Property']['cartWeight'];
+			$o['Order']['subtotal'] = $shop['Property']['cartTotal'];
+			$o['Order']['total'] = $shop['Property']['cartTotal'];
+			$o['Order']['weight'] = $shop['Property']['cartWeight'];
 
 			$o['Order']['status'] = 1;
 
 			if($shop['Order']['order_type'] == 'paypal') {
 				$resArray = $this->Paypal->ConfirmPayment($o['Order']['total']);
 				// debug($resArray);
-				$ack = strtoupper($resArray["ACK"]);
-				if($ack == "SUCCESS" || $ack == "SUCCESSWITHWARNING") {
+				$ack = strtoupper($resArray['ACK']);
+				if($ack == 'SUCCESS' || $ack == 'SUCCESSWITHWARNING') {
 					$o['Order']['status'] = 2;
 
 				}

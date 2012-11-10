@@ -51,7 +51,7 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 <br />
 <br />
 
-<?php foreach ($shop['Cart']['OrderItem'] as $item): ?>
+<?php foreach ($shop['OrderItem'] as $item): ?>
 <div class="row">
 <div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
 <div class="span8"><?php echo $item['Product']['name']; ?></div>
@@ -64,8 +64,8 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 <hr>
 
 <div class="row">
-	<div class="span2 offset8">Items: <?php echo $shop['Cart']['Property']['cartQuantity']; ?></div>
-	<div class="span2">Order Total: <span class="bold red">$<?php echo $shop['Cart']['Property']['cartTotal']; ?></span></div>
+	<div class="span2 offset8">Items: <?php echo $shop['Property']['cartQuantity']; ?></div>
+	<div class="span2">Order Total: <strong>$<?php echo $shop['Property']['cartTotal']; ?></strong></div>
 </div>
 
 <hr>
