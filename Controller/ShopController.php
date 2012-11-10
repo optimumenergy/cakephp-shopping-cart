@@ -84,7 +84,7 @@ class ShopController extends AppController {
 	public function cart() {
 		$this->helpers[] = 'Google';
 		$cart = $this->Session->read('Shop.Cart');
-		$this->set('items', $cart['Items']);
+		$this->set('items', $cart['OrderItem']);
 		$this->set('cartTotal', $cart['Property']['cartTotal']);
 	}
 
@@ -167,7 +167,7 @@ class ShopController extends AppController {
 			$this->loadModel('Order');
 
 			$i = 0;
-			foreach($shop['Cart']['Items'] as $c) {
+			foreach($shop['Cart']['OrderItem'] as $c) {
 				$o['OrderItem'][$i]['name'] = $c['Product']['name'];
 				$o['OrderItem'][$i]['quantity'] = $c['quantity'];
 				$o['OrderItem'][$i]['price'] = $c['subtotal'];

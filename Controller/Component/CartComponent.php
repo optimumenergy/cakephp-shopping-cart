@@ -51,7 +51,7 @@ class CartComponent extends Component {
 		$data['totalweight'] = sprintf('%01.2f', $product['Product']['weight'] * $quantity);
 
 		$data['Product'] = $product['Product'];
-		$this->Session->write('Shop.Cart.Items.' . $id, $data);
+		$this->Session->write('Shop.Cart.OrderItem.' . $id, $data);
 
 		$this->cart();
 
@@ -61,9 +61,9 @@ class CartComponent extends Component {
 //////////////////////////////////////////////////
 
 	public function remove($id) {
-		if($this->Session->check('Shop.Cart.Items.' . $id)) {
-			$product = $this->Session->read('Shop.Cart.Items.' . $id);
-			$this->Session->delete('Shop.Cart.Items.' . $id);
+		if($this->Session->check('Shop.Cart.OrderItem.' . $id)) {
+			$product = $this->Session->read('Shop.Cart.OrderItem.' . $id);
+			$this->Session->delete('Shop.Cart.OrderItem.' . $id);
 			$this->cart();
 			return $product;
 		}
@@ -78,8 +78,8 @@ class CartComponent extends Component {
 		$cartQuantity = 0;
 		$cartWeight = 0;
 
-		if (count($cart['Items']) > 0) {
-			foreach ($cart['Items'] as $item) {
+		if (count($cart['OrderItem']) > 0) {
+			foreach ($cart['OrderItem'] as $item) {
 				$cartTotal += $item['subtotal'];
 				$cartQuantity += $item['quantity'];
 				$cartWeight += $item['totalweight'];

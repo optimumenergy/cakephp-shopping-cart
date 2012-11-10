@@ -7,11 +7,11 @@ $(document).ready(function(){
 		return /\d/.test(String.fromCharCode(event.keyCode));
 	});
 
-	$('.numeric').keyup(function(event) {
+	$('.numeric').on('keyup change', function(event) {
 
-		if(/\d/.test(String.fromCharCode(event.keyCode)) == false) {
-			return false;
-		};
+//		if(/\d/.test(String.fromCharCode(event.keyCode)) == false) {
+//			return false;
+//		};
 
 		var id = $(this).attr("data-id");
 		var quantity = $(this).val();
@@ -44,7 +44,7 @@ $(document).ready(function(){
 			},
 			dataType: "json",
 			success: function(data) {
-				$.each(data.Items, function(key, value) {
+				$.each(data.OrderItem, function(key, value) {
 					if($('#subtotal-' + key).html() != value.subtotal) {
 						$('#ProductQuantity-' + key).val(value.quantity);
 						$('#subtotal-' + key).html(value.subtotal).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);

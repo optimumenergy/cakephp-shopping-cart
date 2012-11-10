@@ -49,7 +49,7 @@ Shipping State: <?php echo $shop['Data']['shipping_state'];?><br />
 <br />
 <br />
 
-<?php foreach ($shop['Cart']['Items'] as $item): ?>
+<?php foreach ($shop['Cart']['OrderItem'] as $item): ?>
 <div class="row">
 <div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
 <div class="span8"><?php echo $item['Product']['name']; ?></div>
