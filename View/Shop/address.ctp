@@ -29,6 +29,8 @@
 
 <?php echo $this->Form->input('billing_state', array('class' => 'span3')); ?>
 
+<?php echo $this->Form->input('billing_country', array('class' => 'span3')); ?>
+
 <br />
 
 </div>
@@ -41,6 +43,8 @@
 <?php echo $this->Form->input('shipping_city', array('class' => 'span3')); ?>
 
 <?php echo $this->Form->input('shipping_state', array('class' => 'span3')); ?>
+
+<?php echo $this->Form->input('shipping_country', array('class' => 'span3')); ?>
 
 <br />
 

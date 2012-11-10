@@ -105,7 +105,6 @@ class ShopController extends AppController {
 				$order = $this->request->data['Order'];
 				$order['order_type'] = 'creditcard';
 				$this->Session->write('Shop.Order', $order);
-				$this->Session->write('Shop.Data', $order);
 				$this->redirect(array('action' => 'review'));
 			} else {
 				$this->Session->setFlash('The form could not be saved. Please, try again.', 'flash_error');
@@ -175,14 +174,14 @@ class ShopController extends AppController {
 				$i++;
 			}
 
-			$o['Order'] = $shop['Data'];
+			$o['Order'] = $shop['Order'];
 			$o['Order']['subtotal'] = $shop['Cart']['Property']['cartTotal'];
 			$o['Order']['total'] = $shop['Cart']['Property']['cartTotal'];
 			$o['Order']['weight'] = $shop['Cart']['Property']['cartWeight'];
 
 			$o['Order']['status'] = 1;
 
-			if($shop['Data']['order_type'] == 'paypal') {
+			if($shop['Order']['order_type'] == 'paypal') {
 				$resArray = $this->Paypal->ConfirmPayment($o['Order']['total']);
 				// debug($resArray);
 				$ack = strtoupper($resArray["ACK"]);
@@ -200,7 +199,7 @@ class ShopController extends AppController {
 				$email = new CakeEmail();
 				$email->from(ADMIN_EMAIL)
 						->cc(ADMIN_EMAIL)
-						->to($shop['Data']['email'])
+						->to($shop['Order']['email'])
 						->subject('Shop Order')
 						->template('order')
 						->emailFormat('text')
@@ -210,25 +209,25 @@ class ShopController extends AppController {
 			}
 		}
 
-		if(empty($shop['Data']) && !empty($shop['Paypal']['Details'])) {
-			$shop['Data']['name'] = $shop['Paypal']['Details']['FIRSTNAME'] . ' ' . $shop['Paypal']['Details']['LASTNAME'];
-			$shop['Data']['email'] = $shop['Paypal']['Details']['EMAIL'];
-			$shop['Data']['phone'] = '';
-			$shop['Data']['billing_address'] = $shop['Paypal']['Details']['SHIPTOSTREET'];
-			$shop['Data']['billing_address2'] = '';
-			$shop['Data']['billing_city'] = $shop['Paypal']['Details']['SHIPTOCITY'];
-			$shop['Data']['billing_zipcode'] = $shop['Paypal']['Details']['SHIPTOZIP'];
-			$shop['Data']['billing_state'] = $shop['Paypal']['Details']['SHIPTOSTATE'];
+		if(empty($shop['Order']) && !empty($shop['Paypal']['Details'])) {
+			$shop['Order']['name'] = $shop['Paypal']['Details']['FIRSTNAME'] . ' ' . $shop['Paypal']['Details']['LASTNAME'];
+			$shop['Order']['email'] = $shop['Paypal']['Details']['EMAIL'];
+			$shop['Order']['phone'] = '';
+			$shop['Order']['billing_address'] = $shop['Paypal']['Details']['SHIPTOSTREET'];
+			$shop['Order']['billing_address2'] = '';
+			$shop['Order']['billing_city'] = $shop['Paypal']['Details']['SHIPTOCITY'];
+			$shop['Order']['billing_zipcode'] = $shop['Paypal']['Details']['SHIPTOZIP'];
+			$shop['Order']['billing_state'] = $shop['Paypal']['Details']['SHIPTOSTATE'];
 
-			$shop['Data']['shipping_address'] = $shop['Paypal']['Details']['SHIPTOSTREET'];
-			$shop['Data']['shipping_address2'] = '';
-			$shop['Data']['shipping_city'] = $shop['Paypal']['Details']['SHIPTOCITY'];
-			$shop['Data']['shipping_zipcode'] = $shop['Paypal']['Details']['SHIPTOZIP'];
-			$shop['Data']['shipping_state'] = $shop['Paypal']['Details']['SHIPTOSTATE'];
+			$shop['Order']['shipping_address'] = $shop['Paypal']['Details']['SHIPTOSTREET'];
+			$shop['Order']['shipping_address2'] = '';
+			$shop['Order']['shipping_city'] = $shop['Paypal']['Details']['SHIPTOCITY'];
+			$shop['Order']['shipping_zipcode'] = $shop['Paypal']['Details']['SHIPTOZIP'];
+			$shop['Order']['shipping_state'] = $shop['Paypal']['Details']['SHIPTOSTATE'];
 
-			$shop['Data']['order_type'] = 'paypal';
+			$shop['Order']['order_type'] = 'paypal';
 
-			$this->Session->write('Shop.Data', $shop['Data']);
+			$this->Session->write('Shop.Order', $shop['Order']);
 		}
 
 		$this->set(compact('shop'));

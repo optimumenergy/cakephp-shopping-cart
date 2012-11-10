@@ -7,29 +7,31 @@
 <div class="row">
 <div class="span4">
 
-Name: <?php echo $shop['Data']['name'];?><br />
-Email: <?php echo $shop['Data']['email'];?><br />
-Phone: <?php echo $shop['Data']['phone'];?><br />
+Name: <?php echo $shop['Order']['name'];?><br />
+Email: <?php echo $shop['Order']['email'];?><br />
+Phone: <?php echo $shop['Order']['phone'];?><br />
 
 <br />
 
 </div>
 <div class="span4">
 
-Billing Address: <?php echo $shop['Data']['billing_address'];?><br />
-Billing Address 2: <?php echo $shop['Data']['billing_address2'];?><br />
-Billing City: <?php echo $shop['Data']['billing_city'];?><br />
-Billing State: <?php echo $shop['Data']['billing_state'];?><br />
+Billing Address: <?php echo $shop['Order']['billing_address'];?><br />
+Billing Address 2: <?php echo $shop['Order']['billing_address2'];?><br />
+Billing City: <?php echo $shop['Order']['billing_city'];?><br />
+Billing State: <?php echo $shop['Order']['billing_state'];?><br />
+Billing Country: <?php echo $shop['Order']['billing_country'];?><br />
 
 <br />
 
 </div>
 <div class="span4">
 
-Shipping Address: <?php echo $shop['Data']['shipping_address'];?><br />
-Shipping Address 2: <?php echo $shop['Data']['shipping_address2'];?><br />
-Shipping City: <?php echo $shop['Data']['shipping_city'];?><br />
-Shipping State: <?php echo $shop['Data']['shipping_state'];?><br />
+Shipping Address: <?php echo $shop['Order']['shipping_address'];?><br />
+Shipping Address 2: <?php echo $shop['Order']['shipping_address2'];?><br />
+Shipping City: <?php echo $shop['Order']['shipping_city'];?><br />
+Shipping State: <?php echo $shop['Order']['shipping_state'];?><br />
+Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 
 <br />
 
