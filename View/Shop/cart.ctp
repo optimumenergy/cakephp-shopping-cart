@@ -4,7 +4,7 @@
 
 <h1>Shopping Cart</h1>
 
-<?php if(empty($items)) : ?>
+<?php if(empty($shop['OrderItem'])) : ?>
 
 Shopping Cart is empty
 
@@ -24,7 +24,7 @@ Shopping Cart is empty
 </div>
 
 <?php $tabindex = 1; ?>
-<?php foreach ($items as $item): ?>
+<?php foreach ($shop['OrderItem'] as $item): ?>
 	<div class="row" id="row-<?php echo $item['Product']['id']; ?>">
 		<div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('class' => 'px60')); ?></div>
 		<div class="span7"><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></div>
@@ -51,7 +51,7 @@ Shopping Cart is empty
 
 <div class="row">
 	<div class="span2 offset10">
-		Subtotal: <span class="normal" id="carttotal">$<?php echo $cartTotal; ?></span>
+		Subtotal: <span class="normal" id="subtotal">$<?php echo $shop['Order']['subtotal']; ?></span>
 		<br />
 		<br />
 		Sales Tax: <span class="normal">N/A</span>
@@ -60,7 +60,7 @@ Shopping Cart is empty
 		Shipping: <span class="normal">N/A</span>
 		<br />
 		<br />
-		Order Total: <span class="red" id="ordertotal">$<?php echo $cartTotal; ?></span>
+		Order Total: <span class="red" id="total">$<?php echo $shop['Order']['total']; ?></span>
 		<br />
 		<br />
 
@@ -74,8 +74,8 @@ Shopping Cart is empty
 		<?php echo $this->Form->end(); ?>
 
 		<form method="POST" action="https://sandbox.google.com/checkout/api/checkout/v2/checkout/Merchant/729483054915369" accept-charset="utf-8">
-		<input type="hidden" name="cart" value="<?php echo $this->Google->cart($items); ?>">
-		<input type="hidden" name="signature" value="<?php echo $this->Google->signature($items); ?>">
+		<input type="hidden" name="cart" value="<?php echo $this->Google->cart($shop['OrderItem']); ?>">
+		<input type="hidden" name="signature" value="<?php echo $this->Google->signature($shop['OrderItem']); ?>">
 		<input type="image" name="Google Checkout" alt="Fast checkout through Google" src="http://checkout.google.com/buttons/checkout.gif?merchant_id=729483054915369&w=160&h=43&style=white&variant=text&loc=en_US" height="43" width="160"/>
 		</form>
 	</div>

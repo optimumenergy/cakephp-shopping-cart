@@ -83,9 +83,8 @@ class ShopController extends AppController {
 
 	public function cart() {
 		$this->helpers[] = 'Google';
-		$cart = $this->Session->read('Shop');
-		$this->set('items', $cart['OrderItem']);
-		$this->set('cartTotal', $cart['Property']['cartTotal']);
+		$shop = $this->Session->read('Shop');
+		$this->set(compact('shop'));
 	}
 
 //////////////////////////////////////////////////
@@ -93,7 +92,7 @@ class ShopController extends AppController {
 	public function address() {
 
 		$shop = $this->Session->read('Shop');
-		if(!$shop['Property']['cartTotal']) {
+		if(!$shop['Order']['total']) {
 			$this->redirect('/');
 		}
 
@@ -101,10 +100,9 @@ class ShopController extends AppController {
 			$this->loadModel('Order');
 			$this->Order->set($this->request->data);
 			if($this->Order->validates()) {
-				echo 'valid';
 				$order = $this->request->data['Order'];
 				$order['order_type'] = 'creditcard';
-				$this->Session->write('Shop.Order', $order);
+				$this->Session->write('Shop.Order', $order + $shop['Order']);
 				$this->redirect(array('action' => 'review'));
 			} else {
 				$this->Session->setFlash('The form could not be saved. Please, try again.', 'flash_error');
@@ -119,7 +117,7 @@ class ShopController extends AppController {
 //////////////////////////////////////////////////
 
 	public function step1() {
-		$paymentAmount = $this->Session->read('Shop.Property.cartTotal');
+		$paymentAmount = $this->Session->read('Shop.Order.total');
 		if(!$paymentAmount) {
 			$this->redirect('/');
 		}
@@ -163,35 +161,21 @@ class ShopController extends AppController {
 		}
 
 		if ($this->request->is('post')) {
+
 			$this->loadModel('Order');
 
-			$i = 0;
-			foreach($shop['OrderItem'] as $c) {
-				$o['OrderItem'][$i]['name'] = $c['Product']['name'];
-				$o['OrderItem'][$i]['quantity'] = $c['quantity'];
-				$o['OrderItem'][$i]['price'] = $c['subtotal'];
-				$o['OrderItem'][$i]['subtotal'] = $c['quantity'] * $c['price'];
-				$o['OrderItem'][$i]['weight'] = $c['totalweight'];
-				$i++;
-			}
-
-			$o['Order'] = $shop['Order'];
-			$o['Order']['subtotal'] = $shop['Property']['cartTotal'];
-			$o['Order']['total'] = $shop['Property']['cartTotal'];
-			$o['Order']['weight'] = $shop['Property']['cartWeight'];
-
-			$o['Order']['status'] = 1;
+			$order = $shop;
+			$order['Order']['status'] = 1;
 
 			if($shop['Order']['order_type'] == 'paypal') {
 				$resArray = $this->Paypal->ConfirmPayment($o['Order']['total']);
 				// debug($resArray);
 				$ack = strtoupper($resArray['ACK']);
 				if($ack == 'SUCCESS' || $ack == 'SUCCESSWITHWARNING') {
-					$o['Order']['status'] = 2;
-
+					$order['Order']['status'] = 2;
 				}
 			}
-			$save = $this->Order->saveAll($o, array('validate' => 'first'));
+			$save = $this->Order->saveAll($order, array('validate' => 'first'));
 			if($save) {
 
 				$this->set(compact('shop'));

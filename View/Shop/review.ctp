@@ -64,8 +64,8 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 <hr>
 
 <div class="row">
-	<div class="span2 offset8">Items: <?php echo $shop['Property']['cartQuantity']; ?></div>
-	<div class="span2">Order Total: <strong>$<?php echo $shop['Property']['cartTotal']; ?></strong></div>
+	<div class="span2 offset8">Items: <?php echo $shop['Order']['quantity']; ?></div>
+	<div class="span2">Order Total: <strong>$<?php echo $shop['Order']['total']; ?></strong></div>
 </div>
 
 <hr>

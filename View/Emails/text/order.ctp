@@ -36,9 +36,9 @@ Description			Item Price			Quantity			Extended Price
 
 <?php endforeach; ?>
 
-Items:	<?php echo $shop['Property']['cartQuantity'];?>
+Items:	<?php echo $shop['Order']['quantity'];?>
 
-Total:	$<?php echo $shop['Property']['cartTotal'];?>
+Total:	$<?php echo $shop['Order']['total'];?>
 
 
 ////////////////////////////////////////////////////////////

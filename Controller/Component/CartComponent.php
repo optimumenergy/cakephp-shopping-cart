@@ -44,14 +44,17 @@ class CartComponent extends Component {
 		if(empty($product)) {
 			return false;
 		}
-		$data['price'] = $product['Product']['price'];
+		$data['name'] = $product['Product']['name'];
 		$data['weight'] = $product['Product']['weight'];
+		$data['price'] = $product['Product']['price'];
 		$data['quantity'] = $quantity;
 		$data['subtotal'] = sprintf('%01.2f', $product['Product']['price'] * $quantity);
 		$data['totalweight'] = sprintf('%01.2f', $product['Product']['weight'] * $quantity);
 
 		$data['Product'] = $product['Product'];
 		$this->Session->write('Shop.OrderItem.' . $id, $data);
+
+		$this->Session->write('Shop.Order.shop', 1);
 
 		$this->cart();
 
@@ -73,28 +76,32 @@ class CartComponent extends Component {
 //////////////////////////////////////////////////
 
 	public function cart() {
-		$cart = $this->Session->read('Shop');
-		$cartTotal = 0;
-		$cartQuantity = 0;
-		$cartWeight = 0;
+		$shop = $this->Session->read('Shop');
+		$quantity = 0;
+		$weight = 0;
+		$subtotal = 0;
+		$total = 0;
 
-		if (count($cart['OrderItem']) > 0) {
-			foreach ($cart['OrderItem'] as $item) {
-				$cartTotal += $item['subtotal'];
-				$cartQuantity += $item['quantity'];
-				$cartWeight += $item['totalweight'];
+		if (count($shop['OrderItem']) > 0) {
+			foreach ($shop['OrderItem'] as $item) {
+				$quantity += $item['quantity'];
+				$weight += $item['totalweight'];
+				$subtotal += $item['subtotal'];
+				$total += $item['subtotal'];
 			}
-			$d['cartTotal'] = sprintf('%01.2f', $cartTotal);
-			$d['cartQuantity'] = $cartQuantity;
-			$d['cartWeight'] = $cartWeight;
-			$this->Session->write('Shop.Property', $d);
+			$d['quantity'] = $quantity;
+			$d['weight'] = $weight;
+			$d['subtotal'] = sprintf('%01.2f', $subtotal);
+			$d['total'] = sprintf('%01.2f', $total);
+			$this->Session->write('Shop.Order', $d + $shop['Order']);
 			return true;
 		}
 		else {
-			$d['cartTotal'] = 0;
-			$d['cartQuantity'] = 0;
-			$d['cartWeight'] = 0;
-			$this->Session->write('Shop.Property', $d);
+			$d['quantity'] = 0;
+			$d['weight'] = 0;
+			$d['subtotal'] = 0;
+			$d['total'] = 0;
+			$this->Session->write('Shop.Order', $d + $shop['Order']);
 			return false;
 		}
 	}
