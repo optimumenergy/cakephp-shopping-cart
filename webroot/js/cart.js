@@ -1,20 +1,24 @@
 $(document).ready(function(){
 
-	$('.numeric').keypress(function(event) {
+	$('.numeric').on('keypress', function(event) {
 		if (event.keyCode == 13) {
 			return true;
 		}
 		return /\d/.test(String.fromCharCode(event.keyCode));
 	});
 
-	$('.numeric').on('keyup change blur', function(event) {
+	$('.numeric').on('keyup change', function(event) {
 
-		if(/\d/.test(String.fromCharCode(event.keyCode)) == false) {
-			return false;
-		};
+		var quantity = $(this).val();
+
+		if ((event.keyCode == 46 || event.keyCode == 8) && quantity > 0) {
+		} else {
+			if(/\d/.test(String.fromCharCode(event.keyCode)) == false) {
+				return false;
+			};
+		}
 
 		var id = $(this).attr("data-id");
-		var quantity = $(this).val();
 
 		ajaxcart(id, quantity);
 
@@ -52,7 +56,7 @@ $(document).ready(function(){
 				});
 				$('#subtotal').html('$' + data.Order.total).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
 				$('#total').html('$' + data.Order.total).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
-				if(data.Property.cartTotal == 0) {
+				if(data.Order.total == 0) {
 					window.location.replace(Shop.basePath + "shop/clear");
 				}
 			},
