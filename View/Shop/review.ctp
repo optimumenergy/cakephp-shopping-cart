@@ -42,10 +42,12 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 
 <div class="row">
 <div class="span1">#</div>
-<div class="span8">ITEM</div>
+<div class="span6">ITEM</div>
+<div class="span1">WEIGHT</div>
+<div class="span1">WEIGHT</div>
 <div class="span1">PRICE</div>
-<div class="span1">QUANTITY</div>
-<div class="span1">SUBTOTAL</div>
+<div class="span1" style="text-align: right;">QUANTITY</div>
+<div class="span1" style="text-align: right;">SUBTOTAL</div>
 </div>
 
 <br />
@@ -54,18 +56,21 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 <?php foreach ($shop['OrderItem'] as $item): ?>
 <div class="row">
 <div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
-<div class="span8"><?php echo $item['Product']['name']; ?></div>
+<div class="span6"><?php echo $item['Product']['name']; ?></div>
+<div class="span1"><?php echo $item['Product']['weight']; ?></div>
+<div class="span1"><?php echo $item['totalweight']; ?></div>
 <div class="span1">$<?php echo $item['Product']['price']; ?></div>
-<div class="span1"><?php echo $item['quantity']; ?></div>
-<div class="span1">$<?php echo $item['subtotal']; ?></div>
+<div class="span1" style="text-align: right;"><?php echo $item['quantity']; ?></div>
+<div class="span1" style="text-align: right;">$<?php echo $item['subtotal']; ?></div>
 </div>
 <?php endforeach; ?>
 
 <hr>
 
 <div class="row">
-	<div class="span2 offset8">Items: <?php echo $shop['Order']['quantity']; ?></div>
-	<div class="span2">Order Total: <strong>$<?php echo $shop['Order']['total']; ?></strong></div>
+	<div class="span10">Products: <?php echo $shop['Order']['order_item_count']; ?></div>
+	<div class="span1" style="text-align: right;">Items: <?php echo $shop['Order']['quantity']; ?></div>
+	<div class="span1" style="text-align: right;">Total<br /><strong>$<?php echo $shop['Order']['total']; ?></strong></div>
 </div>
 
 <hr>
